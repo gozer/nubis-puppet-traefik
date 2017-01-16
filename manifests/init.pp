@@ -1,7 +1,11 @@
-class nubis_traefik($version = '1.1.2') {
+class nubis_traefik($version = '1.1.2', $project=undef) {
   $traefik_url = "https://github.com/containous/traefik/releases/download/v${version}/traefik_linux-amd64"
 
-  notice ("Grabbing traefik ${version}")
+  if (!$project) {
+    $project = $::project_name
+  }
+
+  notice ("Grabbing traefik ${version} for ${project}")
 
   staging::file { '/usr/local/bin/traefik':
     source => $traefik_url,
@@ -17,6 +21,11 @@ class nubis_traefik($version = '1.1.2') {
     owner  => root,
     group  => root,
     mode   => '0640',
+  }
+
+  # For htpasswd
+  package {'apache2-utils':
+    ensure => '2.4.7-1ubuntu4.13'
   }
 
   upstart::job { 'traefik':
