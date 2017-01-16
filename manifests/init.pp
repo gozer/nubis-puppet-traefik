@@ -42,7 +42,25 @@
 #
 # Copyright 2017 Your name here, unless otherwise noted.
 #
-class nubis_traefik {
 
+class nubis_traefik($version = '1.1.2') {
+  $traefik_url = "https://github.com/containous/traefik/releases/download/v${traefik_version}/traefik_linux-amd64"
 
+  notice ("Grabbing traefik ${traefik_version}")
+
+  staging::file { '/usr/local/bin/traefik':
+    source => $traefik_url,
+    target => '/usr/local/bin/traefik',
+  }->
+  exec { 'chmod /usr/local/bin/traefik':
+    command => 'chmod 755 /usr/local/bin/traefik',
+    path    => ['/sbin','/bin','/usr/sbin','/usr/bin','/usr/local/sbin','/usr/local/bin'],
+  }
+
+  file { '/etc/traefik':
+    ensure => directory,
+    owner  => root,
+    group  => root,
+    mode   => '0640',
+  }
 }
