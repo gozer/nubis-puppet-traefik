@@ -74,13 +74,12 @@ fi
 ',
   }
 
-  file { '/etc/confd':
-    ensure  => directory,
-    recurse => true,
-    purge   => false,
+  file { '/etc/confd/conf.d/traefik.toml':
+    ensure  => present,
     owner   => 'root',
     group   => 'root',
-    source  => "puppet:///modules/${module_name}/confd",
+    mode    => '0640',
+    content => template("${module_name}/traefik.toml.tmpl"),
   }
 
   file { '/etc/confd/templates/traefik.toml.tmpl':

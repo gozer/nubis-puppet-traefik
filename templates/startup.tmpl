@@ -3,7 +3,7 @@
 NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
 NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
 
-KV_PREFIX="$NUBIS_PROJECT/$NUBIS_ENVIRONMENT/traefik/config"
+KV_PREFIX="<%= @project %>-$NUBIS_PROJECT/$NUBIS_ENVIRONMENT/traefik/config"
 
 if [ "$NUBIS_ENVIRONMENT" != "" ]; then
   consulate kv set "$KV_PREFIX/EnvironmentName" "$NUBIS_ENVIRONMENT"
