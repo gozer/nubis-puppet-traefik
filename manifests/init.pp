@@ -1,4 +1,4 @@
-class nubis_traefik($version = '1.1.2', $tag="monitoring", $project=undef) {
+class nubis_traefik($version = '1.1.2', $tag_name='monitoring', $project=undef) {
   $traefik_url = "https://github.com/containous/traefik/releases/download/v${version}/traefik_linux-amd64"
 
   if (!$project) {
