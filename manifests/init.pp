@@ -80,7 +80,7 @@ fi
     purge   => false,
     owner   => 'root',
     group   => 'root',
-    source  => "puppet:///${module_name}/confd",
+    source  => "puppet:///modules/${module_name}/confd",
   }
 
   file { '/etc/confd/templates/traefik.toml.tmpl':
