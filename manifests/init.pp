@@ -84,10 +84,18 @@ fi
   }
 
   file { '/etc/confd/templates/traefik.toml.tmpl':
-    ensure   => present,
-    owner    => 'root',
-    group    => 'root',
-    mode     => '0640',
-    content  => template("${module_name}/traefik.toml.tmpl.tmpl"),
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0640',
+    content => template("${module_name}/traefik.toml.tmpl.tmpl"),
+  }
+
+  file { "/etc/nubis.d/${project}-traefik":
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    content => template("${module_name}/startup.tmpl"),
   }
 }
