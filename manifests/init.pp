@@ -73,4 +73,21 @@ if [ $goal != "stop" ]; then
 fi
 ',
   }
+
+  file { '/etc/confd':
+    ensure  => directory,
+    recurse => true,
+    purge   => false,
+    owner   => 'root',
+    group   => 'root',
+    source  => "puppet:///${module_name}/files/confd",
+  }
+
+  file { '/etc/confd/templates/traefik.toml.tmpl':
+    ensure   => present,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0640',
+    content  => template("${module_name}/traefik.toml.tmpl.tmpl"),
+  }
 }

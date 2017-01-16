@@ -3,8 +3,7 @@
     "name": "traefik",
     "port": 8082,
     "tags": [
-      "<%= @project %>",
-      "traefik.tags=<%= @tag_name %>",
+      "traefik.tags=monitoring",
       "traefik.frontend.rule=PathPrefixStrip:/traefik"
     ],
     "check": {
