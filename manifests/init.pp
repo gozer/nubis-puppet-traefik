@@ -1,4 +1,4 @@
-class nubis_traefik($version = '1.1.2', $project=undef) {
+class nubis_traefik($version = '1.1.2', $tag="monitoring", $project=undef) {
   $traefik_url = "https://github.com/containous/traefik/releases/download/v${version}/traefik_linux-amd64"
 
   if (!$project) {
@@ -21,6 +21,14 @@ class nubis_traefik($version = '1.1.2', $project=undef) {
     owner  => root,
     group  => root,
     mode   => '0640',
+  }
+
+  file { '/etc/consul/svc-traefik.json':
+    ensure  => file,
+    owner   => root,
+    group   => root,
+    mode    => '0644',
+    content => template("${module_name}/svc-traefik.json.tmpl"),
   }
 
   # For htpasswd

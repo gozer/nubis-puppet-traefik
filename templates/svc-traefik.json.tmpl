@@ -1,0 +1,16 @@
+{
+  "service": {
+    "name": "traefik",
+    "port": 8082,
+    "tags": [
+      "<%= @project %>",
+      "traefik.tags=<%= @tag %>",
+      "traefik.frontend.rule=PathPrefixStrip:/traefik"
+    ],
+    "check": {
+       "http": "http://localhost:8082/health",
+       "interval": "10s",
+       "timeout": "1s"
+    }
+  }
+}
