@@ -25,16 +25,16 @@ constraints = [ "tag==<%= @tag_name %>" ]
 [consul]
 endpoint = "127.0.0.1:8500"
 watch = true
-prefix = "traefik-<%= @project %>/{{ getv "/config/EnvironmentName" }}/config"
+prefix = "<%= @project %>-traefik/{{ getv "/config/EnvironmentName" }}/config"
 
 [acme]
 # Handle when this isn't set
 email="{{ getv "/config/Email/Destination" }}"
-storage = "traefik-<%= @project %>/{{ getv "/config/EnvironmentName" }}/acme"
+storage = "<%= @project %>-traefik/{{ getv "/config/EnvironmentName" }}/acme"
 entryPoint = "https"
 
 # Disable for prod
-#caServer = "https://acme-staging.api.letsencrypt.org/directory"
+caServer = "https://acme-staging.api.letsencrypt.org/directory"
 
 onDemand = true
 [[acme.domains]]
