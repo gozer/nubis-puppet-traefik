@@ -60,6 +60,7 @@ class nubis_traefik($version = '1.1.2', $tag_name='monitoring', $project=undef) 
 
   exec /usr/local/bin/traefik --web.readonly=true --loglevel=INFO
 ',
+    post_start     => 'initctl set-env SLEEP_TIME=1',
     post_stop      => '
 goal=$(initctl status $UPSTART_JOB | awk \'{print $2}\' | cut -d \'/\' -f 1)
 if [ $goal != "stop" ]; then
