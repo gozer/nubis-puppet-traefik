@@ -1,7 +1,7 @@
 [template]
 src = "traefik.toml.tmpl"
 dest = "/etc/traefik/traefik.toml"
-prefix = "/<%= @project %>-%%PROJECT%%/%%ENVIRONMENT%%/traefik"
+prefix = "/%%PROJECT%%/%%ENVIRONMENT%%/traefik"
 
 uid = 0
 gid = 0

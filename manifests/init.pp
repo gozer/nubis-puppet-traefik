@@ -1,8 +1,18 @@
-class nubis_traefik($version = '1.1.2', $tag_name='monitoring', $project=undef) {
+class nubis_traefik($version = '1.1.2', $tag_name='monitoring', $project=undef, $dns=undef) {
   $traefik_url = "https://github.com/containous/traefik/releases/download/v${version}/traefik_linux-amd64"
 
-  if (!$project) {
-    $project = $::project_name
+  if ($project) {
+    $traefik_project = $project
+  }
+  else {
+    $traefik_project = $::project_name
+  }
+
+  if ($dns) {
+    $traefik_dns = $dns
+  }
+  else {
+    $traefik_dns = $traefik_project
   }
 
   notice ("Grabbing traefik ${version} for ${project}")

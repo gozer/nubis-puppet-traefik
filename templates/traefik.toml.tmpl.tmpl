@@ -25,12 +25,12 @@ constraints = [ "tag==<%= @tag_name %>" ]
 [consul]
 endpoint = "127.0.0.1:8500"
 watch = true
-prefix = "<%= @project %>-traefik/{{ getv "/config/EnvironmentName" }}/config"
+prefix = "<%= @traefik_project %>-traefik/{{ getv "/config/EnvironmentName" }}/config"
 
 [acme]
 # Handle when this isn't set
 email="{{ getv "/config/Email/Destination" }}"
-storage = "<%= @project %>-traefik/{{ getv "/config/EnvironmentName" }}/acme"
+storage = "<%= @traefik_project %>-traefik/{{ getv "/config/EnvironmentName" }}/acme"
 entryPoint = "https"
 
 # Disable for prod

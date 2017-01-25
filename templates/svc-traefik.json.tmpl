@@ -1,9 +1,9 @@
 {
   "service": {
-    "name": "<%= @project %>-traefik",
+    "name": "<%= @traefik_project %>-traefik",
     "port": 8082,
     "tags": [
-      "<%= @project %>",
+      "<%= @traefik_project %>",
       "traefik.tags=<%= @tag_name %>",
       "traefik.frontend.rule=PathPrefixStrip:/traefik"
     ],
