@@ -40,7 +40,7 @@ storage = "<%= @traefik_project %>-traefik/{{ getv "/config/EnvironmentName" }}/
 entryPoint = "https"
 
 # Disable for prod
-caServer = "https://acme-staging.api.letsencrypt.org/directory"
+# caServer = "https://acme-staging.api.letsencrypt.org/directory"
 
 onDemand = true
 [[acme.domains]]
