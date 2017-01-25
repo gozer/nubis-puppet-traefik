@@ -29,7 +29,13 @@ prefix = "<%= @traefik_project %>-traefik/{{ getv "/config/EnvironmentName" }}/c
 
 [acme]
 # Handle when this isn't set
+
+{{if exists "/config/Email/Destination" }}
+email="nubis-team@mozilla.com"
+{{else}}
 email="{{ getv "/config/Email/Destination" }}"
+{{end}}
+
 storage = "<%= @traefik_project %>-traefik/{{ getv "/config/EnvironmentName" }}/acme"
 entryPoint = "https"
 
