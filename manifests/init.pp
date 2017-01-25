@@ -101,7 +101,7 @@ fi
     content => template("${module_name}/traefik.toml.tmpl.tmpl"),
   }
 
-  file { "/etc/nubis.d/${project}-traefik":
+  file { "/etc/nubis.d/${traefik_project}-traefik":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
