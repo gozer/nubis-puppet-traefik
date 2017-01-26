@@ -45,6 +45,9 @@ class nubis_traefik($version = '1.1.2', $tag_name='monitoring', $project=undef, 
   package {'apache2-utils':
     ensure => '2.4.7-1ubuntu4.13'
   }
+  package {'apg':
+    ensure => '2.2.3.dfsg.1-2ubuntu1',
+  }
 
   upstart::job { 'traefik':
     description    => 'Traefik Load Balancer',
