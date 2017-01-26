@@ -18,7 +18,7 @@ consulate kv set "$KV_PREFIX/MonDomain" "$NUBIS_MON_DOMAIN"
 FEDERATION_PASSWORD=$(consulate kv get "$KV_PREFIX/Federation/Password")
 if [ "$FEDERATION_PASSWORD" == "None" ]; then
   FEDERATION_PASSWORD=$(apg -m 16 -n1)
-  FEDERATION_HTPASSWORD=$(htpasswd -nb federation "$SECRET_FEDERATION_PASSWORD")
+  FEDERATION_HTPASSWORD=$(htpasswd -nb federation "$FEDERATION_PASSWORD")
 
   consulate kv set "$KV_PREFIX/Federation/Password" "$FEDERATION_PASSWORD"
   consulate kv set "$KV_PREFIX/Federation/HTPassword" "$FEDERATION_HTPASSWORD"
@@ -28,7 +28,7 @@ ADMIN_PASSWORD=$(consulate kv get "$KV_PREFIX/admin/Password")
 if [ "$ADMIN_PASSWORD" == "None" ]; then
 
   ADMIN_PASSWORD=$(apg -m 16 -n1)
-  ADMIN_HTPASSWORD=$(htpasswd -nb admin "$SECRET_ADMIN_PASSWORD")
+  ADMIN_HTPASSWORD=$(htpasswd -nb admin "$ADMIN_PASSWORD")
 
   consulate kv set "$KV_PREFIX/Admin/Password" "$ADMIN_PASSWORD"
   consulate kv set "$KV_PREFIX/Admin/HTPassword" "$ADMIN_HTPASSWORD"
