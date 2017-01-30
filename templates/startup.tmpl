@@ -24,7 +24,7 @@ if [ "$FEDERATION_PASSWORD" == "None" ]; then
   consulate kv set "$KV_PREFIX/Federation/HTPassword" "$FEDERATION_HTPASSWORD"
 fi
 
-ADMIN_PASSWORD=$(consulate kv get "$KV_PREFIX/admin/Password")
+ADMIN_PASSWORD=$(consulate kv get "$KV_PREFIX/Admin/Password")
 if [ "$ADMIN_PASSWORD" == "None" ]; then
 
   ADMIN_PASSWORD=$(apg -m 16 -n1)
