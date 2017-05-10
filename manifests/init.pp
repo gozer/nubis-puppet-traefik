@@ -43,10 +43,10 @@ class nubis_traefik($version = '1.2.0', $tag_name='monitoring', $project=undef, 
 
   # For htpasswd
   package {'apache2-utils':
-    ensure => '2.4.7-1ubuntu4.13'
+    ensure => 'present',
   }
   package {'apg':
-    ensure => '2.2.3.dfsg.1-2ubuntu1',
+    ensure => 'present',
   }
 
   upstart::job { 'traefik':
