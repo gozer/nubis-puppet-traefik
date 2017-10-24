@@ -3,9 +3,7 @@
     "name": "<%= @traefik_project %>-traefik",
     "port": 8082,
     "tags": [
-      "<%= @traefik_project %>",
-      "traefik.tags=<%= @tag_name %>",
-      "traefik.frontend.rule=PathPrefixStrip:/traefik"
+      "<%= @traefik_project %>"
     ],
     "check": {
        "http": "http://localhost:8082/health",
