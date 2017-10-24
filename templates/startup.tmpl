@@ -2,6 +2,7 @@
 
 NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
 NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
+NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
 NUBIS_REGION=$(nubis-region)
 
 KV_PREFIX="$NUBIS_PROJECT/$NUBIS_ENVIRONMENT/traefik/config"
@@ -12,7 +13,7 @@ else
   consulate kv rm "$KV_PREFIX/EnvironmentName"
 fi
 
-NUBIS_MON_DOMAIN="<%= @traefik_dns %>.$NUBIS_ENVIRONMENT.$NUBIS_REGION.$(nubis-metadata NUBIS_ACCOUNT).$(nubis-metadata NUBIS_DOMAIN)"
+NUBIS_MON_DOMAIN="<%= @traefik_dns %>.$NUBIS_ENVIRONMENT.$NUBIS_ARENA.$NUBIS_REGION.$(nubis-metadata NUBIS_ACCOUNT).$(nubis-metadata NUBIS_DOMAIN)"
 consulate kv set "$KV_PREFIX/MonDomain" "$NUBIS_MON_DOMAIN"
 
 FEDERATION_PASSWORD=$(consulate kv get "$KV_PREFIX/Federation/Password")
