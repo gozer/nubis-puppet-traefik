@@ -17,11 +17,6 @@ defaultEntryPoints = ["http","https"]
 [web]
 address = ":8082"
 
-[consulCatalog]
-endpoint = "127.0.0.1:8500"
-domain = "{{ getv "/config/MonDomain" }}"
-constraints = [ "tag==<%= @tag_name %>" ]
-
 [consul]
 endpoint = "127.0.0.1:8500"
 watch = true
@@ -46,6 +41,23 @@ onDemand = true
 [[acme.domains]]
    main = "{{ getv "/config/MonDomain" }}"
 
-#[file]
-#watch = true
-#filename = "/etc/traefik/rules.toml"
+[file]
+[backends]
+  [backends.prometheus]
+    [backends.prometheus.servers.server1]
+    url = "http://127.0.0.1:9090"
+  [backends.alertmanager]
+    [backends.alertmanager.servers.server1]
+    url = "http://127.0.0.1:9093"
+
+[frontends]
+  [frontends.prometheus]
+  passHostHeader = true
+  backend="prometheus"
+    [frontends.prometheus.routes.main]
+    rule="PathPrefix:/prometheus"
+  [frontends.alertmanager]
+  passHostHeader = true
+  backend="alertmanager"
+    [frontends.alertmanager.routes.main]
+    rule="PathPrefix:/alertmanager"
