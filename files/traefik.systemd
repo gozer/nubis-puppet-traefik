@@ -7,7 +7,7 @@ After=basic.target network.target
 Restart=on-failure
 RestartSec=10s
 
-ExecStart=bash -c '. /etc/profile.d/proxy.sh && /usr/local/bin/traefik --web.readonly=true --loglevel=INFO'
+ExecStart=/bin/bash -c '. /etc/profile.d/proxy.sh && /usr/local/bin/traefik --web.readonly=true --loglevel=INFO'
 
 [Install]
 WantedBy=multi-user.target
