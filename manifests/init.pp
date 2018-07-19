@@ -50,7 +50,7 @@ class nubis_traefik($version = '1.4.0', $project=undef, $dns=undef) {
   }
 
   systemd::unit_file { 'traefik.service':
-    source => 'puppet:///nubis/files/traefik.systemd',
+    source => "puppet://modules/${module_name}/traefik.systemd",
   }
   ->service { 'traefik':
     enable => true,
