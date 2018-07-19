@@ -1,6 +1,6 @@
 {
   "name": "nubis-nubis_traefik",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "nubis",
   "summary": "Nubis Grafana",
   "license": "MPL-2.0",
@@ -8,8 +8,14 @@
   "project_page": "https://github.com/nubisproject/nubis-puppet-traefik",
   "issues_url": "https://github.com/nubisproject/nubis-puppet-traefik/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
-    {"name":"spantree/upstart","version_requirement":"0.0.3"}
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    },
+    {
+      "name": "camptocamp/systemd",
+      "version_requirement": ">= 1.x"
+    }
   ],
   "data_provider": null
 }

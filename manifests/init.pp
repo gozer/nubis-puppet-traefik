@@ -49,43 +49,11 @@ class nubis_traefik($version = '1.4.0', $project=undef, $dns=undef) {
     ensure => 'present',
   }
 
-  upstart::job { 'traefik':
-    description    => 'Traefik Load Balancer',
-    service_ensure => 'stopped',
-    require        => [
-      Staging::File['/usr/local/bin/traefik'],
-    ],
-    # Never give up
-    respawn        => true,
-    respawn_limit  => 'unlimited',
-    start_on       => '(local-filesystems and net-device-up IFACE!=lo)',
-    env            => {
-      'SLEEP_TIME' => 1,
-      'GOMAXPROCS' => 2,
-    },
-    user           => 'root',
-    group          => 'root',
-    script         => '
-  if [ -r /etc/profile.d/proxy.sh ]; then
-    echo "Loading Proxy settings"
-    . /etc/profile.d/proxy.sh
-  fi
-
-  exec /usr/local/bin/traefik --web.readonly=true --loglevel=INFO
-',
-    post_start     => 'initctl set-env SLEEP_TIME=1',
-    post_stop      => '
-goal=$(initctl status $UPSTART_JOB | awk \'{print $2}\' | cut -d \'/\' -f 1)
-if [ $goal != "stop" ]; then
-    echo "Backoff for $SLEEP_TIME seconds"
-    sleep $SLEEP_TIME
-    NEW_SLEEP_TIME=`expr 2 \* $SLEEP_TIME`
-    if [ $NEW_SLEEP_TIME -ge 60 ]; then
-        NEW_SLEEP_TIME=60
-    fi
-    initctl set-env SLEEP_TIME=$NEW_SLEEP_TIME
-fi
-',
+  systemd::unit_file { 'traefik.service':
+    source => 'puppet:///nubis/files/traefik.systemd',
+  }
+  ->service { 'traefik':
+    enable => true,
   }
 
   file { '/etc/confd/conf.d/traefik.toml':
